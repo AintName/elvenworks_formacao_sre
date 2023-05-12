@@ -1,6 +1,6 @@
 ---
   - name: instalacao Wordpress
-    hosts: wordpress2
+    hosts: localhost
     become: yes
     #
     roles:
