@@ -16,6 +16,7 @@
       - php7.4-common
       - php7.4-gd
       - php7.4-json
+      - mysql-client
       update_cache: yes
   
   - name: Configuracao do vhost nginx

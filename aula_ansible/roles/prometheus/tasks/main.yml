@@ -1,0 +1,43 @@
+- hosts: monitoring
+  become: true
+
+  tasks:
+    - name: Install Prometheus
+      apt:
+        name: prometheus
+        state: present
+
+    - name: Install Node Exporter
+      apt:
+        name: prometheus-node-exporter
+        state: present
+
+    - name: Install Alert Manager
+      apt:
+        name: prometheus-alertmanager
+        state: present
+
+    - name: Configure Prometheus
+      template:
+        src: prometheus.yml.j2
+        dest: /etc/prometheus/prometheus.yml
+
+    - name: Configure Alert Manager
+      template:
+        src: alertmanager.yml.j2
+        dest: /etc/alertmanager/alertmanager.yml
+
+    - name: Start Prometheus
+      systemd:
+        name: prometheus
+        state: started
+
+    - name: Start Node Exporter
+      systemd:
+        name: prometheus-node-exporter
+        state: started
+
+    - name: Start Alert Manager
+      systemd:
+        name: prometheus-alertmanager
+        state: started
